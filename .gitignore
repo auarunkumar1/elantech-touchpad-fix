@@ -1,0 +1,12 @@
+# Local symlinks to other project scripts
+asus-battery-limiter.sh
+mint-optimizer.sh
+
+# Logs and traces
+*.log
+*.trace
+/tmp/
+
+# Python cache
+__pycache__/
+*.pyc
