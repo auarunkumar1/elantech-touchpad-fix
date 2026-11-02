@@ -193,7 +193,7 @@ install_permanent() {
 # runtime suspend. Suspending it loses touch input for a second or two.
 ACTION!="remove", SUBSYSTEM=="platform", DRIVER=="i2c_designware", TEST=="power/control", ATTR{power/control}="on"
 ACTION!="remove", SUBSYSTEM=="platform", KERNEL=="AMDI0010:*", TEST=="power/control", ATTR{power/control}="on"
-ACTION!="remove", SUBSYSTEM=="i2c", ATTR{name}=="ELAN*", TEST=="power/control", ATTR{power/runtime_status}!="unsupported", ATTR{power/control}="on"
+ACTION!="remove", SUBSYSTEM=="i2c", ATTR{name}=="ELAN*", TEST=="power/control", ATTR{power/control}="on"
 # Some AMD laptops expose the I2C controller as a PCI device instead.
 ACTION!="remove", SUBSYSTEM=="pci", ATTR{class}=="0x0c80*", TEST=="power/control", ATTR{power/control}="on"
 EOF

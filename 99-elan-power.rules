@@ -1,0 +1,11 @@
+# ELAN I2C touchpad on AMD APUs: keep the DesignWare host controller out of
+# runtime suspend. Suspending it loses touch input for a second or two.
+# The ELAN client does not implement runtime PM, so the controller
+# suspends underneath the running touchpad and every touch after an idle
+# second needs an I2C controller resume. Keeping it out of runtime PM
+# prevents the momentary freeze.
+ACTION!="remove", SUBSYSTEM=="platform", DRIVER=="i2c_designware", TEST=="power/control", ATTR{power/control}="on"
+ACTION!="remove", SUBSYSTEM=="platform", KERNEL=="AMDI0010:*", TEST=="power/control", ATTR{power/control}="on"
+ACTION!="remove", SUBSYSTEM=="i2c", ATTR{name}=="ELAN*", TEST=="power/control", ATTR{power/control}="on"
+# Some AMD laptops expose the I2C controller as a PCI device instead.
+ACTION!="remove", SUBSYSTEM=="pci", ATTR{class}=="0x0c80*", TEST=="power/control", ATTR{power/control}="on"
